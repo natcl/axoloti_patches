@@ -1,0 +1,102 @@
+<patch-1.0>
+   <obj type="midi/in/keyb" sha="d2b06e818348b14523c68fd021077192860093c0" uuid="53b04874696932f38aceaa168bd5d9efb743716d" name="keyb_1" x="42" y="98">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gain/vca" sha="c904cdd24d65968df2f5796e107db3747dd691a6" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_1" x="392" y="98">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="filter/vcf3" sha="2a5cccf4517f54d2450ab7518925f49e4c41c837" uuid="92455c652cd098cbb682a5497baa18abbf2ef865" name="vcf3_1" x="490" y="112">
+      <params>
+         <frac32.s.map name="pitch" MidiCC="5" value="42.0"/>
+         <frac32.u.map name="reso" MidiCC="6" value="41.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="osc/square" sha="7cccf8a95bf312ecc084f11f532cf5fda00b8c58" uuid="aa9592566d3673fe64dcaede132e9ebd45d2202f" name="square_1" x="238" y="126">
+      <params>
+         <frac32.s.map name="pitch" value="-12.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="delay/echo fdbk mix" sha="6bc1204ca59cfb6fe995e01f4a68be52ca63cd0" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="616" y="126">
+      <params>
+         <frac32.u.map name="mix" value="64.0"/>
+         <frac32.u.map name="feedback" MidiCC="7" value="48.5"/>
+      </params>
+      <attribs>
+         <spinner attributeName="delaylength" value="3456"/>
+      </attribs>
+   </obj>
+   <obj type="audio/out stereo" sha="c27566f972d15f25252f61b5cff014a3edce9706" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="924" y="126">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" sha="a73a2cafcf92eb4b6524655dcee98a569d5ddc28" uuid="7a66f52a9594e7e9eb31328ea725cb3641a80b55" name="*c_1" x="770" y="140">
+      <params>
+         <frac32.u.map name="amp" MidiCC="8" value="41.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="env/adsr" sha="2c4b16047d03b574d8a72b651f130895749eb670" uuid="d1dbcc5fa6f87b98a6a91c87fd44acee5e690bac" name="adsr_1" x="252" y="266">
+      <params>
+         <frac32.s.map name="a" MidiCC="1" value="63.99999952316284"/>
+         <frac32.s.map name="d" MidiCC="2" value="-64.0"/>
+         <frac32.u.map name="s" MidiCC="3" value="0.5"/>
+         <frac32.s.map name="r" MidiCC="4" value="34.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="*c_1" outlet="out"/>
+         <dest obj="out_1" inlet="left"/>
+         <dest obj="out_1" inlet="right"/>
+      </net>
+      <net>
+         <source obj="keyb_1" outlet="note"/>
+         <dest obj="square_1" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="square_1" outlet="wave"/>
+         <dest obj="vca_1" inlet="a"/>
+      </net>
+      <net>
+         <source obj="adsr_1" outlet="env"/>
+         <dest obj="vca_1" inlet="v"/>
+      </net>
+      <net>
+         <source obj="vca_1" outlet="o"/>
+         <dest obj="vcf3_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="vcf3_1" outlet="out"/>
+         <dest obj="echo_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="echo_1" outlet="out"/>
+         <dest obj="*c_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="keyb_1" outlet="gate"/>
+         <dest obj="adsr_1" inlet="gate"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>1</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+      <Author></Author>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>81</x>
+      <y>23</y>
+      <width>1235</width>
+      <height>719</height>
+   </windowPos>
+</patch-1.0>
